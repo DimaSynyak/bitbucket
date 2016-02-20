@@ -1,0 +1,29 @@
+input[type=submit]{
+    width: 100%;
+    margin-top: 2px;
+    margin-bottom: 2px;
+}
+
+select{
+    float: right;
+    margin-top: 2px;
+    margin-bottom: 2px;
+}
+.message{
+    border: solid 1px;
+    padding: 10px;
+}
+
+.message_title{
+    text-align: center;
+}
+
+.border{
+    border: 1px solid;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.button{
+    width: 100px !important;
+}

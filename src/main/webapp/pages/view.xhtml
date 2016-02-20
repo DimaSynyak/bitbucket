@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
+      xmlns:sec="http://www.springframework.org/security/tags">
+
+<h:head>
+   <h:outputStylesheet name="bootstrap/css/bootstrap.min.css"/>
+   <h:outputStylesheet name="bootstrap/css/bootstrap-theme.min.css"/>
+   <h:outputStylesheet name="css/style.css"/>
+   <h:outputStylesheet name="css/view.css"/>
+</h:head>
+
+
+<h:body>
+   <sec:authorize access="isAuthenticated()" var="secured"/>
+
+   <div class="container center">
+      <form action="#{request.contextPath}/j_spring_security_logout" method="post">
+         <div class="row">
+            <div class="col-xs-12">
+               <h1>Messages Board</h1>
+               <input type="submit" value="Logout"/>
+            </div>
+         </div>
+      </form>
+
+      <div class="row filter">
+         <div class="col-xs-2">
+            <form action="#{request.contextPath}/edit" method="post">
+               <h:commandButton type="submit" value="Create Messages" />
+            </form>
+         </div>
+
+         <h:form>
+            <div class="col-xs-3 filter_left">
+               <h:outputLabel value="Author:"/>
+               <h:inputText size="10" value="#{filter.search}"/>
+               <h:commandButton styleClass="button" id="search_button" action="#{filter.doFilter()}" value="Search">
+                  <f:ajax execute="@form" render=":message_list"/>
+               </h:commandButton>
+            </div>
+
+            <div class="col-xs-3 filter_center">
+               <h:outputLabel id="title" value="Category: "/>
+               <h:selectOneMenu value="#{filter.category}" onselect="document.getElementById('btn').submit();">
+                  <f:selectItems value="#{categoryList.getCategories()}" var="item" itemLabel="#{item.getCategory()}" itemValue="#{item.getCategory()}"/>
+                  <f:ajax execute="@form" render=":message_list "/>
+               </h:selectOneMenu>
+
+            </div>
+
+            <div class="col-xs-2 filter_right">
+
+               <h:outputLabel value="My messages"/>
+               <h:selectBooleanCheckbox value="#{filter.state}" onchange="document.getElementById('btn').submit();">
+                  <f:ajax execute="@form" render=":message_list "/>
+               </h:selectBooleanCheckbox>
+               <h:commandButton style="display: none" id="btn" action="#{filter.doFilter()}"/>
+
+            </div>
+         </h:form>
+      </div>
+   </div>
+
+   <!--<c:forEach var="item" items="">-->
+   <h:form id="message_list">
+
+      <ui:repeat  value="#{messageList.getMessages()}" var="item">
+         <div class="container message">
+            <div class="row">
+               <div class="col-xs-12 message_title">
+                  <h:outputLabel value="#{item.getTitle()}"/>
+
+               </div>
+            </div>
+
+            <div class="row">
+               <div class="col-xs-2">
+                  <h:outputLabel styleClass="static_field" value="Author:"/>
+                  <h:outputLabel styleClass="dinamyc_field" value="#{item.getAuthor().getName()}"/>
+                  <br/>
+                  <h:outputLabel styleClass="static_field" value="Date:"/>
+                  <h:outputLabel styleClass="dinamyc_field" value="#{item.getDate()}"/>
+                  <br/>
+                  <h:outputLabel styleClass="static_field" value="Category:"/>
+                  <h:outputLabel styleClass="dinamyc_field" value="#{item.getCategory().getCategory()}"/>
+                  <br/>
+                  <h:commandButton styleClass="button" value="Delete" action="#{messageList.deleteMessage(item.getId())}">
+                     <f:ajax execute="@form" render=":message_list"/>
+                  </h:commandButton>
+               </div>
+
+               <div class="col-xs-10">
+                  <p>
+                     #{item.getContent()}
+                  </p>
+               </div>
+            </div>
+         </div>
+      </ui:repeat>
+   </h:form>
+</h:body>
+
+
+</html>

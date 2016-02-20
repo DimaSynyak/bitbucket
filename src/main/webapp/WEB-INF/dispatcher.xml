@@ -12,9 +12,9 @@
        http://www.springframework.org/schema/context/spring-context.xsd
         http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.0.xsd ">
 
-    <context:component-scan base-package="java.synyak.project"/>
+    <context:component-scan base-package="ua.lardy.project"/>
 
-    <aop:aspectj-autoproxy proxy-target-class="true"/>
+    <!--<aop:aspectj-autoproxy proxy-target-class="true"/>-->
 
     <mvc:annotation-driven/>
     <mvc:resources mapping="/resources/**" location="/resources/"/>
@@ -23,11 +23,7 @@
 
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="prefix" value="/pages/"/>
-        <property name="suffix" value=".jsp"/>
-    </bean>
-
-    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
-        <property name="maxUploadSize" value="400000"/>
+        <property name="suffix" value=".xhtml"/>
     </bean>
 
 

@@ -21,19 +21,14 @@ public class Author {
     @Column(name = "name")
     private String name;
 
-    @Column(name = "birthday")
-    private Date birthday;
+    @Column(name = "login")
+    private String login;
+
+    @Column(name = "password")
+    private String password;
 
     public Author() {
 
-    }
-
-    public Date getBirthday() {
-        return this.birthday;
-    }
-
-    public void setBirthday(Date birthday) {
-        this.birthday = birthday;
     }
 
     public String getName() {
@@ -52,5 +47,21 @@ public class Author {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public String getLogin() {
+        return login;
+    }
+
+    public void setLogin(String login) {
+        this.login = login;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }

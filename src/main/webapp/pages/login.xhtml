@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:sec="http://www.springframework.org/security/tags"
+      xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+
+<h:head>
+   <h:outputStylesheet name="bootstrap/css/bootstrap.min.css"/>
+   <h:outputStylesheet name="bootstrap/css/bootstrap-theme.min.css"/>
+   <h:outputStylesheet name="css/style.css"/>
+   <h:outputStylesheet name="css/login.css"/>
+</h:head>
+
+<h:body>
+
+   <sec:authorize access="isAuthenticated()" var="secured"/>
+
+   <div class="container center">
+      <div class="row">
+         <div class="col-xs-offset-4 col-xs-3">
+            <h1>Login</h1>
+         </div>
+      </div>
+
+
+      <form id="login" action="#{request.contextPath}/j_spring_security_check" method="post">
+         <div class="row">
+            <div class="col-xs-offset-4 col-xs-1 padLabel">
+               <h:outputLabel>Login:</h:outputLabel>
+            </div>
+            <div class="col-xs-3 padInput">
+               <input type="text" name="j_username" size="20"/>
+            </div>
+         </div>
+
+
+         <div class="row">
+            <div class="col-xs-offset-4 col-xs-1 padLabel">
+               <h:outputLabel>Password:</h:outputLabel>
+            </div>
+            <div class="col-xs-3 padInput">
+               <input type="password" name="j_password" size="20"/>
+            </div>
+         </div>
+
+         <div class="row">
+            <div class="col-xs-offset-4 col-xs-3">
+               <input type="submit" class="button" value="OK" />
+            </div>
+         </div>
+      </form>
+   </div>
+
+</h:body>
+
+</html>
