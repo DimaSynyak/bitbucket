@@ -65,6 +65,7 @@
           <element id="library" level="project" name="Maven: org.springframework.webflow:spring-js-resources:2.4.2.RELEASE" />
           <element id="library" level="project" name="Maven: org.springframework.webflow:spring-js:2.4.2.RELEASE" />
           <element id="library" level="project" name="Maven: org.springframework.webflow:spring-webflow:2.4.2.RELEASE" />
+          <element id="library" level="project" name="Maven: javax.validation:validation-api:1.1.0.Final" />
         </element>
       </element>
       <element id="javaee-facet-resources" facet="MessagesBoard/web/Web" />

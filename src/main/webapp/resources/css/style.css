@@ -27,6 +27,12 @@ textarea {
     min-height: 100px;
 }
 
+.btn_logout{
+    width: 75px;
+    height: 35px;
+    float: left;
+}
+
 .padLabel{
     padding: 6px 0px 6px 17px;
 }

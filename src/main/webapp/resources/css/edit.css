@@ -27,3 +27,9 @@ select{
 .button{
     width: 100px !important;
 }
+
+.btn_logout{
+    width: 75px !important;
+    height: 35px;
+    float: left;
+}

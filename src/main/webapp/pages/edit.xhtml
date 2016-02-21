@@ -22,7 +22,7 @@
       <div class="row">
          <div class="col-xs-12">
             <h1>Editor </h1>
-            <input type="submit" value="Logout"/>
+            <input class="btn_logout" type="submit" value="Logout"/>
          </div>
       </div>
    </div>
@@ -33,7 +33,11 @@
          <div class="row">
             <div class="col-xs-12 message_title">
                <h:outputLabel value="Title:" />
-               <h:inputText value="#{createController.title}" size="20"/>
+               <h:inputText id="title_input" value="#{createController.title}" size="20" validatorMessage="Титул собщения должен быть не менее 20 и не более 30 символов">
+                  <f:validateLength minimum="20" maximum="30"/>
+               </h:inputText>
+               <br/>
+               <h:message id="m1" for="title_input" style="color: red"/>
             </div>
          </div>
 
@@ -55,7 +59,11 @@
             </div>
 
             <div class="col-xs-9">
-               <h:inputTextarea  value="#{createController.message}"/>
+               <h:inputTextarea id="message_iput" value="#{createController.message}" validatorMessage="Текст собщения должен быть не менее 20 и не более 400 символов">
+                  <f:validateLength minimum="20" maximum="400"/>
+               </h:inputTextarea>
+               <br/>
+               <h:message id="m2" for="message_iput" style="color: red"/>
             </div>
          </div>
       </div>

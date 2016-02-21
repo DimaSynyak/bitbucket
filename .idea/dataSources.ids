@@ -21,7 +21,7 @@
       </column>
       <column id="7" parent="2" name="date">
         <mandatory>1</mandatory>
-        <data-type>varchar(12)</data-type>
+        <data-type>mediumtext</data-type>
       </column>
       <column id="8" parent="2" name="id_category">
         <mandatory>1</mandatory>

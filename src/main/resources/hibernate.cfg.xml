@@ -13,9 +13,9 @@
         <property name="hibernate.current_session_context_class">thread</property>
         <property name="show_sql">true</property>
 
-        <mapping class="ua.lardy.project.beans.author.Author"/>
-        <mapping class="ua.lardy.project.beans.category.Category"/>
-        <mapping class="ua.lardy.project.beans.messages.Message"/>
+        <mapping class="ua.lardy.project.project.beans.author.Author"/>
+        <mapping class="ua.lardy.project.project.beans.category.Category"/>
+        <mapping class="ua.lardy.project.project.beans.messages.Message"/>
 
     </session-factory>
 </hibernate-configuration>
