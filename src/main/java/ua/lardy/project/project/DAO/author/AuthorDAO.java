@@ -11,7 +11,10 @@ import ua.lardy.project.project.beans.author.Author;
 import java.util.List;
 
 /**
- * Created by root on 8/13/15.
+ * Класс, котроый описывает механизм управления данными в таблицах реляционного отображения.
+ * Данный класс описывает управление реляционным отображением данных класса {@link Author}.
+ * @author Sinyak D.V.
+ * @version 1.0
  */
 @Component(value = "authorDAO")
 public class AuthorDAO implements IAuthorDAO {
@@ -23,10 +26,11 @@ public class AuthorDAO implements IAuthorDAO {
     public AuthorDAO() {
     }
 
-    public void insertAuthor(Author author) {
-//        session.save(author);
-    }
-
+    /**
+     * Метод предназначен возвращать объекты, класса {@link Author}, из таблицы баз данных, которые удовлетворяют критерию поиска.
+     * @param name строковая переменная, котроя принимает на вход имя автора. Критерий поиска.
+     * @return Возвращает объект класса {@link Author}.
+     */
     public Author getAuthorByName(String name) {
         Author author = null;
         Session session = sessionFactory.getCurrentSession();
@@ -36,6 +40,10 @@ public class AuthorDAO implements IAuthorDAO {
         return author;
     }
 
+    /**
+     * Метод предназначен возвращать списки всех объектов, класса {@link Author}, из таблицы баз данных.
+     * @return Возвращает список объектов класса {@link Author}.
+     */
     public List<Author> getAuthorList() {
         List<Author> authorList = null;
         Session session = sessionFactory.getCurrentSession();
@@ -46,6 +54,11 @@ public class AuthorDAO implements IAuthorDAO {
         return authorList;
     }
 
+    /**
+     * Метод предназначен возвращать объекты, класса {@link Author}, из таблицы баз данных, которые удовлетворяют критерию поиска.
+     * @param login строковая переменная, которая принимает на вход логин автора. Критерий поиска.
+     * @return Возвращает объект класса {@link Author}.
+     */
     public Author getAuthorByLogin(String login) {
         Author author = null;
         Session session = sessionFactory.getCurrentSession();
@@ -55,6 +68,11 @@ public class AuthorDAO implements IAuthorDAO {
         return author;
     }
 
+    /**
+     * Метод предназначен возвращать списки объектов, класса {@link Author}, из таблицы баз данных, которые удовлетворяют критерию поиска.
+     * @param name строковый параметр, который принимает на вход имя или часть имени автора. Критерий поиска.
+     * @return Возвращает список объектов класса {@link Author}.
+     */
     public List<Author> getAuthorsByName(String name) {
         List<Author> authorList = null;
         Session session = sessionFactory.getCurrentSession();
@@ -65,13 +83,4 @@ public class AuthorDAO implements IAuthorDAO {
         transaction.commit();
         return authorList;
     }
-
-    public SessionFactory getSessionFactory() {
-        return sessionFactory;
-    }
-
-    public void setSessionFactory(SessionFactory sessionFactory) {
-        this.sessionFactory = sessionFactory;
-    }
-
 }

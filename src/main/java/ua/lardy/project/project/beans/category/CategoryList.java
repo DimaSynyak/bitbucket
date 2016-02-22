@@ -8,7 +8,9 @@ import javax.inject.Named;
 import java.util.List;
 
 /**
- * Created by root on 8/13/15.
+ * Класс контроллер. Связывает отображение и модель объектов.
+ * @author Sinyak D.V
+ * @version 1.0
  */
 @Named
 @SessionScoped
@@ -22,17 +24,26 @@ public class CategoryList {
 
     public CategoryList(){}
 
+    /**
+     * Метод предназначен для возврата списка рубрик из таблицы баз данных.
+     * @return Возвращает все рубрики из таблиц баз данных
+     */
     public List<Category> getCategories(){
         categories = categoryDAO.getCategories();
         return categories;
     }
 
+    /**
+     * Метод предназначен для возврата рубрики из таблицы базданных.
+     * @param name строковое значение, которое принимает на вход название рубрики. Критерий поиска.
+     * @return Возвращает объект типа {@link Category}
+     */
     public Category getCategoryByName(String name){
         category = categoryDAO.getCategory(name);
         return category;
     }
 
-    public Category getCategoryByFirst(){
+    public Category getCategoryFirst(){
         return categoryDAO.getCategory();
     }
 }

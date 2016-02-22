@@ -10,7 +10,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import ua.lardy.project.project.services.datails.UserDatail;
 
 /**
- * Created by root on 8/12/15.
+ * Конфигурационный класс. Класс предназначен для настроек аутентификации пользователей.
  */
 @Configuration
 @EnableWebSecurity
@@ -21,20 +21,23 @@ public class Security extends WebSecurityConfigurerAdapter {
     private UserDatail userDatail;
 
     public Security() {
-        System.out.println(this);
     }
 
+    /**
+     * Метод предназначен для регистрации реализации userDatail.
+     * @param auth ссылочная переменная, которая принимает на вход объект AuthenticationManagerBuilder.
+     * @throws Exception
+     */
     @Autowired
     private void registerGlobalAuthentication(AuthenticationManagerBuilder auth) throws Exception {
             auth.userDetailsService(userDatail);
     }
 
-    @Autowired
-    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-        auth.inMemoryAuthentication().withUser("login").password("pass").roles("USER");
-        auth.userDetailsService(userDatail);
-    }
-
+    /**
+     * Метод предназначен для конфигурирования системы аутентификации.
+     * @param http ссылочная переменная, которая принимает на вход объект HttpSecurity
+     * @throws Exception
+     */
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable()

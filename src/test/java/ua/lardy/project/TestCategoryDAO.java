@@ -41,9 +41,4 @@ public class TestCategoryDAO {
         Category category = categoryDAO.getCategory("SELL");
         assertTrue(category != null);
     }
-
-//    @Test
-//    public void test(){
-//        assertTrue(true);
-//    }
 }

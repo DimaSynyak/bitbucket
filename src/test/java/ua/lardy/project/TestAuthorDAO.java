@@ -57,9 +57,4 @@ public class TestAuthorDAO {
         List<Author> authorList = authorDAO.getAuthorsByName("Dmitriy");
         assertTrue(authorList != null);
     }
-
-//    @Test
-//    public void test(){
-//        assertTrue(true);
-//    }
 }

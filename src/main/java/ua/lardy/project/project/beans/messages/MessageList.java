@@ -16,7 +16,10 @@ import javax.inject.Named;
 import java.util.*;
 
 /**
- * Created by root on 8/13/15.
+ * Класс контроллер. Связывает отображение и модель объектов.
+ * Принимает, обрабатывает и отправляет информацию на отображение.
+ * @author Sinyak D.V.
+ * @version 1.0
  */
 @Named
 @SessionScoped
@@ -40,6 +43,10 @@ public class MessageList {
     public MessageList() {
     }
 
+    /**
+     * Метод предназначен для формирования и возврата списка всех сообщений
+     * @return Возвращает список сообщений типа {@link Message}
+     */
     public List<Message> getMessages(){
         List<Message> messages = null;
         if (filter.isState()){
@@ -63,6 +70,10 @@ public class MessageList {
         return messages;
     }
 
+    /**
+     * Метод предназначен для формирования и возврата списка сообщений отсортированных по автору.
+     * @return Возвращает список сообщений типа {@link Message}
+     */
     public List<Message> getAllMessagesByAuthor(){
         List<Message> messages = null;
 
@@ -76,6 +87,9 @@ public class MessageList {
         return messageDAO.getMessagesByAuthors(authorList);
     }
 
+    /**
+     * Метод предназначен для сохранения сообщения в базе данных.
+     */
     public void createMessage(){
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String name = auth.getName();
@@ -96,6 +110,10 @@ public class MessageList {
         createController.setId_message(0);
     }
 
+    /**
+     * Метод предназначен для обновления данных объекта {@link Message}.
+     * @param id_message порядковый номер сообщения в таблице баз данных.
+     */
     public void edit(int id_message){
         Message message = messageDAO.getMessageById(id_message);
         createController.setTitle(message.getTitle());
@@ -104,6 +122,10 @@ public class MessageList {
         createController.setId_message(message.getId());
     }
 
+    /**
+     * Метод предназначен обновлять данные сообщения в таблице баз данных.
+     * @param id_message порядковый номер сообщения в таблице баз данных.
+     */
     public void update(int id_message){
         if (id_message == 0)
             return;
@@ -125,6 +147,10 @@ public class MessageList {
         createController.setId_message(0);
     }
 
+    /**
+     * Метод предназначен для удаления сообщений из таблицы баз данных.
+     * @param id_message порядковый номер сообщение в таблице баз данных.
+     */
     public void deleteMessage(int id_message){
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String name = auth.getName();
@@ -136,44 +162,27 @@ public class MessageList {
         }
     }
 
-
+    /**
+     * Метод предназначен возвращать объект фильтра (тип {@link Filter}).
+     * @return Возвращает {@link Filter}.
+     */
     public Filter getFilter() {
         return filter;
     }
 
+    /**
+     * Метод предназначен для записи объекта фильтра.
+     * @param filter объект типа {@link Filter}.
+     */
     public void setFilter(Filter filter) {
         this.filter = filter;
     }
 
+    /**
+     * Метод предназначен возвращать объект {@link MessageDAO}.
+     * @return Возвращает объект {@link MessageDAO}.
+     */
     public MessageDAO getMessageDAO() {
         return messageDAO;
-    }
-
-    public void setMessageDAO(MessageDAO messageDAO) {
-        this.messageDAO = messageDAO;
-    }
-
-    public AuthorList getAuthorList() {
-        return authorList;
-    }
-
-    public void setAuthorList(AuthorList authorList) {
-        this.authorList = authorList;
-    }
-
-    public CategoryList getCategoryList() {
-        return categoryList;
-    }
-
-    public void setCategoryList(CategoryList categoryList) {
-        this.categoryList = categoryList;
-    }
-
-    public CreateController getCreateController() {
-        return createController;
-    }
-
-    public void setCreateController(CreateController createController) {
-        this.createController = createController;
     }
 }

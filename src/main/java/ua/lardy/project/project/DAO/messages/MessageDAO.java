@@ -18,24 +18,22 @@ import java.util.List;
 
 
 /**
- * Created by root on 8/13/15.
+ * Класс, котроый описывает механизм управления данными в таблицах реляционного отображения.
+ * Данный класс описывает управление реляционным отображением данных класса {@link Message}.
+ * @author Sinyak D.V.
+ * @version 1.0
  */
 @Component(value = "messageDAO")
 public class MessageDAO implements IMessageDAO {
 
-
-    private String filter;
-
     @Autowired
     private SessionFactory sessionFactory;
 
-    @Autowired
-    private AuthorDAO authorDAO;
-
-    @Autowired
-    private CategoryDAO categoryDAO;
-
-
+    /**
+     * Метод предназначен возвращать списки объектов, класса {@link Message}, из таблицы баз данных.
+     * @param category_id целочисленная переменная, котроя принимает на вход порядковый номер рубрики. Критерий поиска.
+     * @return Возвращает список объектов класса {@link Message}.
+     */
     public List<Message> getMessagesByCategoryId(int category_id) {
         List<Message> messages = null;
         Session session = sessionFactory.getCurrentSession();
@@ -49,7 +47,10 @@ public class MessageDAO implements IMessageDAO {
         return messages;
     }
 
-
+    /**
+     * Метод предназначен возвращать списки всех объектов, класса {@link Message}, из таблицы баз данных.
+     * @return Возвращает список объектов класса {@link Message}.
+     */
     public List<Message> getMessages() {
         List<Message> messages = null;
         Session session = sessionFactory.getCurrentSession();
@@ -62,6 +63,12 @@ public class MessageDAO implements IMessageDAO {
         return messages;
     }
 
+    /**
+     * Метод предназначен возвращать списки объектов, класса {@link Message}, из таблицы баз данных, которые удовлетворяют критериям поиска.
+     * @param id_author целочисленная переменная, котроя принимает на вход порядковый номер автора. Критерий поиска.
+     * @param id_category целочисленная переменная, которая принимает на вход порядковый номер рубрики. Критерий поиска.
+     * @return Возвращает список объектов класса {@link Message}.
+     */
     public List<Message> getMessagesByAuthorAndCategory(int id_author, int id_category) {
         List<Message> messages = null;
         Session session = sessionFactory.getCurrentSession();
@@ -76,6 +83,11 @@ public class MessageDAO implements IMessageDAO {
         return messages;
     }
 
+    /**
+     * Метод предназначен возвращать списки объектов, класса {@link Message}, из таблицы баз данных, которые удовлетворяют критериям поиска.
+     * @param list ссылочная переменная, которая принимает на вход список объектов, класса {@link Author}. Критерий поиска.
+     * @return Возвращает список объектов класса {@link Message}.
+     */
     public List<Message> getMessagesByAuthors(List<Author> list) {
         List<Message> messages = null;
         Session session = sessionFactory.getCurrentSession();
@@ -92,6 +104,12 @@ public class MessageDAO implements IMessageDAO {
         return messages;
     }
 
+    /**
+     * Метод предназначен возвращать списки объектов, класса {@link Message}, из таблицы баз данных, которые удовлетворяют критериям поиска.
+     * @param list ссылочная переменная, котроя принимает на вход список объектов, класса {@link Author}. Критерий поиска.
+     * @param id_category целочисленная переменная, которая принимает на вход порядковый номер рубрики. Критерий поиска.
+     * @return Возвращает список объектов класса {@link Message}.
+     */
     public List<Message> getMessagesByAuthorsAndCategory(List<Author> list, int id_category) {
         List<Message> messages = null;
         Session session = sessionFactory.getCurrentSession();
@@ -117,6 +135,11 @@ public class MessageDAO implements IMessageDAO {
         return messages;
     }
 
+    /**
+     * Метод предназначен возвращать списки объектов, класса {@link Message}, из таблицы баз данных, которые удовлетворяют критерию поиска.
+     * @param message_id целочисленная переменная, котроя принимает на вход порядковый номер сообщения. Критерий поиска.
+     * @return Возвращает список объектов класса {@link Message}.
+     */
     public Message getMessageById(int message_id) {
         Message message = null;
         Session session = sessionFactory.getCurrentSession();
@@ -130,6 +153,11 @@ public class MessageDAO implements IMessageDAO {
         return message;
     }
 
+    /**
+     * Метод предназначен возвращать объекты, класса {@link Message}, из таблицы баз данных, которые удовлетворяют критерию поиска.
+     * @param title строковая переменная, котроя принимает на вход название сообщения. Критерий поиска.
+     * @return Возвращает список объектов класса {@link Message}.
+     */
     public Message getMessageByTitle(String title) {
         Message message = null;
         Session session = sessionFactory.getCurrentSession();
@@ -144,6 +172,10 @@ public class MessageDAO implements IMessageDAO {
         return message;
     }
 
+    /**
+     * Метод предназначен сохранять сообщения в таблице баз данных.
+     * @param message ссылочная переменная переменная, котроя принимает на вход объект сообщения.
+     */
     public void createMessage(Message message) {
         Session session = sessionFactory.getCurrentSession();
         Transaction transaction = session.beginTransaction();
@@ -152,6 +184,10 @@ public class MessageDAO implements IMessageDAO {
         transaction.commit();
     }
 
+    /**
+     * Метод предназначен удалять сообщения из таблицы баз данных.
+     * @param id_message целочисленная переменная, котроя принимает на вход порядковый номер сообщения.
+     */
     public void deleteMessage(int id_message) {
         Message message = getMessageById(id_message);
         Session session = sessionFactory.getCurrentSession();
@@ -161,35 +197,15 @@ public class MessageDAO implements IMessageDAO {
         transaction.commit();
     }
 
+    /**
+     * Метод предназначен обновлять сообщения в таблице баз данных.
+     * @param message ссылочная переменная, котроя принимает на вход объект сообщения.
+     */
     public void updateMessage(Message message) {
         Session session = sessionFactory.getCurrentSession();
         Transaction transaction = session.beginTransaction();
         transaction.begin();
         session.update(message);
         transaction.commit();
-    }
-
-    public SessionFactory getSessionFactory() {
-        return sessionFactory;
-    }
-
-    public void setSessionFactory(SessionFactory sessionFactory) {
-        this.sessionFactory = sessionFactory;
-    }
-
-    public AuthorDAO getAuthorDAO() {
-        return authorDAO;
-    }
-
-    public void setAuthorDAO(AuthorDAO authorDAO) {
-        this.authorDAO = authorDAO;
-    }
-
-    public CategoryDAO getCategoryDAO() {
-        return categoryDAO;
-    }
-
-    public void setCategoryDAO(CategoryDAO categoryDAO) {
-        this.categoryDAO = categoryDAO;
     }
 }

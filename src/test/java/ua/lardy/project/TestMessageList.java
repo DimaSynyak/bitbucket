@@ -64,10 +64,4 @@ public class TestMessageList {
         String str = date2.toString();
         assertTrue(true);
     }
-
-//    @Test
-//    public void test(){
-//        assertTrue(true);
-//    }
-
 }

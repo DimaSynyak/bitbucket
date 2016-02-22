@@ -114,10 +114,4 @@ public class TestMessagesDAO {
         messageDAO.deleteMessage(message2.getId());
         assertTrue(message.getTitle().equals(message2.getTitle()));
     }
-
-//    @Test
-//    public void test(){
-//        assertTrue(true);
-//    }
-
 }
